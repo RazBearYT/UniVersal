@@ -1,0 +1,86 @@
+local Flux = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt"))()
+
+local esp_settings = { -- Table for ESP settings
+    textsize = 8,
+    colour = Color3.fromRGB(255, 255, 255) -- Use Color3.fromRGB to create a Color3 value
+}
+
+local espGui = Instance.new("BillboardGui")
+local espLabel = Instance.new("TextLabel", espGui)
+
+espGui.Name = "CrackedESP"
+espGui.ResetOnSpawn = false
+espGui.AlwaysOnTop = true
+espGui.LightInfluence = 0
+espGui.Size = UDim2.new(1.75, 0, 1.75, 0)
+
+espLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+espLabel.Text = ""
+espLabel.Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001)
+espLabel.BorderSizePixel = 4
+espLabel.BorderColor3 = esp_settings.colour
+espLabel.BorderSizePixel = 0
+espLabel.Font = "GothamSemibold"
+espLabel.TextSize = esp_settings.textsize
+espLabel.TextColor3 = esp_settings.colour
+
+local function updateESP()
+    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+        if player ~= game:GetService("Players").LocalPlayer and player.Character and player.Character:FindFirstChild("Head") and player.Character.Head:FindFirstChild("CrackedESP") == nil then
+            espLabel.Text = "{" .. player.Name .. "}"
+            local espClone = espGui:Clone()
+            espClone.Parent = player.Character.Head
+        end
+    end
+end
+
+local espToggle = false
+
+local win = Flux:Window("JailBreak Script", "Baseplate", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
+local tab = win:Tab("Main", "http://www.roblox.com/asset/?id=6023426915")
+
+tab:Toggle("ESP", "Shows People around you as a white box", function(enabled)
+    espToggle = enabled
+end)
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    if espToggle then
+        updateESP()
+    end
+end)
+
+tab:Button("Kill all", "This function may not work sometimes and you can get banned.", function()
+    Flux:Notification("Killed all players successfully!", "Alright")
+end)
+
+tab:Label("Scripts")
+tab:Line()
+tab:Slider("Walkspeed", "Makes your faster.", 0, 100, 16, function(t)
+    print(t)
+end)
+
+tab:Dropdown("Part to aim at", {
+    "Torso",
+    "Head"
+}, function(t)
+    print(t)
+end)
+
+tab:Bind("Kill Bind", Enum.KeyCode.Q, function()
+    print("Killed a random person!")
+end)
+
+local tab2 = win:Tab("Tab 2", "http://www.roblox.com/asset/?id=6023426915")
+
+tab2:Button("Button 1", "Description for Button 1", function()
+    print("Button 1 clicked!")
+end)
+
+tab2:Button("Button 2", "Description for Button 2", function()
+    print("Button 2 clicked!")
+end)
+
+win:Tab("Auto Farm", "http://www.roblox.com/asset/?id=6023426915")
+tab:Textbox("Gun Power", "This textbox changes your gun power, so you can kill everyone faster and easier.", true, function(t)
+    print(t)
+end)
