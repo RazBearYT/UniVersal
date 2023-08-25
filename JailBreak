@@ -1,8 +1,8 @@
 local Flux = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/fluxlib.txt"))()
 
-local esp_settings = {
+local esp_settings = { -- Table for ESP settings
     textsize = 8,
-    colour = Color3.fromRGB(255, 255, 255)
+    colour = Color3.fromRGB(255, 255, 255) -- Use Color3.fromRGB to create a Color3 value
 }
 
 local espGui = Instance.new("BillboardGui")
@@ -36,10 +36,10 @@ end
 
 local espToggle = false
 
-local win = Flux:Window("JailBreak Script", "Baseplate", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
+local win = Flux:Window("Universal BEST Roblox Scripts", "Made By Wh1teK!ll", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
 local tab = win:Tab("Main", "http://www.roblox.com/asset/?id=6023426915")
 
-local espToggleElement = tab:Toggle("ESP", "Shows People around you as a white box", function(enabled)
+tab:Toggle("ESP", "Shows People around you as a white box", function(enabled)
     espToggle = enabled
 end)
 
@@ -64,7 +64,7 @@ tab:Dropdown("Part to aim at", {
     "Head"
 }, function(t)
     print(t)
-end)
+end) 
 
 tab:Bind("Kill Bind", Enum.KeyCode.Q, function()
     print("Killed a random person!")
@@ -78,9 +78,4 @@ end)
 
 tab2:Button("Button 2", "Description for Button 2", function()
     print("Button 2 clicked!")
-end)
-
-win:Tab("Auto Farm", "http://www.roblox.com/asset/?id=6023426915")
-tab:Textbox("Gun Power", "This textbox changes your gun power, so you can kill everyone faster and easier.", true, function(t)
-    print(t)
 end)
